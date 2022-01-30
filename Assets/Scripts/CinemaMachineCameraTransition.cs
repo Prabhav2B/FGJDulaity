@@ -25,6 +25,9 @@ public class CinemaMachineCameraTransition : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!collision.CompareTag("Player"))
+            return;
+
         _fromCam = _brain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>();
         _fromCam.gameObject.SetActive(false);
         _toCam.gameObject.SetActive(true);
@@ -32,7 +35,10 @@ public class CinemaMachineCameraTransition : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _fromCam.gameObject.SetActive(true);
+        if (!collision.CompareTag("Player"))
+            return;
+
         _toCam.gameObject.SetActive(false);
+        _fromCam.gameObject.SetActive(true);
     }
 }
