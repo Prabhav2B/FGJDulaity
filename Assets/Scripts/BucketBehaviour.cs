@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class BucketBehaviour : MonoBehaviour
 {
+
+    [SerializeField] private AudioClip fillWaterSFX;
+    [SerializeField] private AudioClip douseWaterSFX;
+    
     private bool _isWaterFilled;
 
     private Transform _playerTransform;
     [SerializeField] private GameObject _spriteGameObject;
     private SpriteRenderer _waterSprite;
     private BoundryDetection _boundryDetection;
+    private AudioSource _audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +24,7 @@ public class BucketBehaviour : MonoBehaviour
         _playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         _waterSprite = _spriteGameObject.GetComponent<SpriteRenderer>();
         _boundryDetection = FindObjectOfType<BoundryDetection>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -30,12 +36,14 @@ public class BucketBehaviour : MonoBehaviour
         {
             _isWaterFilled = true;
             _waterSprite.enabled = true;
+            _audioSource.PlayOneShot(fillWaterSFX);
         }
 
         if (_boundryDetection.stopMovingLeft && _waterSprite.enabled && _isWaterFilled)
         {
             _isWaterFilled = false;
             _waterSprite.enabled = false;
+            _audioSource.PlayOneShot(douseWaterSFX);
         }
     }
 }
