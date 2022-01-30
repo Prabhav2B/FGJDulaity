@@ -8,6 +8,8 @@ public class CharacterBodyTorque : MonoBehaviour
     [SerializeField] private float torque = 10f;
     [SerializeField] private float torqueThreshold = 80f;
     [SerializeField] private float waitTime = 1f;
+
+    private CharacterHeadFollow _characterHeadFollow;
     
     private Rigidbody2D rb;
     private float turn;
@@ -15,6 +17,7 @@ public class CharacterBodyTorque : MonoBehaviour
     
     void Awake()
     {
+        _characterHeadFollow = FindObjectOfType<CharacterHeadFollow>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -60,7 +63,7 @@ public class CharacterBodyTorque : MonoBehaviour
             timer += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-
+        
         inputPause = false;
         yield return null;
     }
