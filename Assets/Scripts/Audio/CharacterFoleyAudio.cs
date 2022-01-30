@@ -5,7 +5,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(AudioSource))]
-public class CharacterFoley : MonoBehaviour
+public class CharacterFoleyAudio : MonoBehaviour
 {
     [SerializeField] private List<AudioClip> _footStepAudioClips;
     private AudioSource _audioSource;

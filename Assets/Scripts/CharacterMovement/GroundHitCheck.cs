@@ -19,6 +19,7 @@ public class GroundHitCheck : MonoBehaviour
 
         OnGroundImpact += FindObjectOfType<CharacterHeadFollow>().SetBob;
         OnGroundImpact += PlayParticles;
+        OnGroundImpact += GetComponentInParent<CharacterFoleyAudio>().PlayRandomFootstep;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
