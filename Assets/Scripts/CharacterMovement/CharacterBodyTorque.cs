@@ -9,6 +9,7 @@ public class CharacterBodyTorque : MonoBehaviour
     [SerializeField] private float torqueThreshold = 80f;
     [SerializeField] private float waitTime = 1f;
 
+    private BoundryDetection _boundryDetection;
     private CharacterHeadFollow _characterHeadFollow;
     
     private Rigidbody2D rb;
@@ -19,6 +20,8 @@ public class CharacterBodyTorque : MonoBehaviour
     {
         _characterHeadFollow = FindObjectOfType<CharacterHeadFollow>();
         rb = GetComponent<Rigidbody2D>();
+
+        _boundryDetection = GetComponent<BoundryDetection>();
     }
 
     public void SetTorqueValue(Vector2 receivedInput)
@@ -28,8 +31,10 @@ public class CharacterBodyTorque : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
-        if(Mathf.Approximately(turn, 0f))
+        if (_boundryDetection.stopMovingLeft && turn < 0f || _boundryDetection.stopMovingRight && turn > 0f)
+            return;
+
+        if (Mathf.Approximately(turn, 0f))
             return;
 
         GenerateTorque(turn);

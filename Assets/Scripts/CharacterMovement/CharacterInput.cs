@@ -19,6 +19,5 @@ public class CharacterInput : MonoBehaviour
     {
         ReceivedInput = context.ReadValue<Vector2>();
         _characterBodyTorque.SetTorqueValue(ReceivedInput);
-    }
-    
+    }    
 }
